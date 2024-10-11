@@ -4,6 +4,7 @@ import {
   closestCenter,
   DndContext,
   MouseSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -13,7 +14,8 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { SortableItem } from "./SortableItem";
-import { HolderOutlined } from "@ant-design/icons"; // Мы создадим этот компонент ниже
+import { HolderOutlined } from "@ant-design/icons";
+import styles from "./SortableList.module.scss";
 
 const SortableList = () => {
   const [items, setItems] = useState([
@@ -27,9 +29,17 @@ const SortableList = () => {
   ]);
 
   const sensors = useSensors(
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 50,
+        tolerance: 3,
+      },
+    }),
     useSensor(MouseSensor, {
       activationConstraint: {
-        distance: 10,
+        distance: 5,
+        delay: 0,
+        tolerance: 0,
       },
     })
   );
@@ -37,7 +47,7 @@ const SortableList = () => {
   const handleDragEnd = (event) => {
     const { active, over } = event;
 
-    if (active.id !== over.id) {
+    if (active && over && active.id !== over.id) {
       setItems((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id);
         const newIndex = items.findIndex((item) => item.id === over.id);
@@ -58,26 +68,23 @@ const SortableList = () => {
         strategy={verticalListSortingStrategy}
       >
         <List
+          className={styles.list}
           dataSource={items}
           bordered
-          style={{ width: "min-content" }}
+          // style={{ width: "100%", minWidth: 260, maxWidth: 320 }}
           renderItem={(item) => (
             <SortableItem key={item.id} id={item.id}>
               <List.Item
+                className={styles.item}
                 style={{
-                  margin: 8,
-                  borderRadius: 8,
-                  width: "min-content",
-                  minWidth: 260,
                   backgroundColor: item.checked ? "white" : "#f1f1f1",
-                  boxShadow:
-                    "0 0 0 1px rgba(63, 63, 68, 0.05), 0 1px 3px 0 rgba(34, 33, 81, 0.15)",
                 }}
               >
                 <Flex justify="space-between" style={{ width: "100%" }}>
                   <HolderOutlined />
                   {item.content}
                   <Checkbox
+                    style={{ touchAction: "none" }}
                     checked={item.checked}
                     onChange={() =>
                       setItems((prev) =>
@@ -86,6 +93,16 @@ const SortableList = () => {
                         )
                       )
                     }
+                    onMouseDown={(e) => {
+                      e.stopPropagation();
+                    }}
+                    onTouchStart={(e) => {
+                      e.stopPropagation();
+                    }}
+                    onTouchEnd={(e) => {
+                      e.stopPropagation();
+                    }}
+                    data-touch-action="auto"
                   />
                 </Flex>
               </List.Item>
