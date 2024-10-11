@@ -20,6 +20,10 @@ const SortableList = () => {
     { id: "1", content: "Item 1", checked: true },
     { id: "2", content: "Item 2", checked: true },
     { id: "3", content: "Item 3", checked: true },
+    { id: "4", content: "Item 4", checked: true },
+    { id: "5", content: "Item 5", checked: true },
+    { id: "6", content: "Item 6", checked: true },
+    { id: "7", content: "Item 7", checked: false },
   ]);
 
   const sensors = useSensors(
@@ -61,12 +65,13 @@ const SortableList = () => {
             <SortableItem key={item.id} id={item.id}>
               <List.Item
                 style={{
-                  border: "1px solid lightgrey",
-                  margin: 2,
+                  margin: 8,
                   borderRadius: 8,
                   width: "min-content",
                   minWidth: 260,
-                  backgroundColor: item.checked ? "white" : "lightgrey",
+                  backgroundColor: item.checked ? "white" : "#f1f1f1",
+                  boxShadow:
+                    "0 0 0 1px rgba(63, 63, 68, 0.05), 0 1px 3px 0 rgba(34, 33, 81, 0.15)",
                 }}
               >
                 <Flex justify="space-between" style={{ width: "100%" }}>
