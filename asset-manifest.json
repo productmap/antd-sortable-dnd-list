@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/antd-sortable-dnd-list/static/css/main.30fb04ac.css",
-    "main.js": "/antd-sortable-dnd-list/static/js/main.c0f638a2.js",
+    "main.css": "/antd-sortable-dnd-list/static/css/main.1ca7c4a2.css",
+    "main.js": "/antd-sortable-dnd-list/static/js/main.f26e5ccc.js",
     "index.html": "/antd-sortable-dnd-list/index.html",
-    "main.30fb04ac.css.map": "/antd-sortable-dnd-list/static/css/main.30fb04ac.css.map",
-    "main.c0f638a2.js.map": "/antd-sortable-dnd-list/static/js/main.c0f638a2.js.map"
+    "main.1ca7c4a2.css.map": "/antd-sortable-dnd-list/static/css/main.1ca7c4a2.css.map",
+    "main.f26e5ccc.js.map": "/antd-sortable-dnd-list/static/js/main.f26e5ccc.js.map"
   },
   "entrypoints": [
-    "static/css/main.30fb04ac.css",
-    "static/js/main.c0f638a2.js"
+    "static/css/main.1ca7c4a2.css",
+    "static/js/main.f26e5ccc.js"
   ]
 }
