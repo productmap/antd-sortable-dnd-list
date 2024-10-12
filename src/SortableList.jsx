@@ -57,6 +57,12 @@ const SortableList = () => {
     }
   };
 
+  const toggleItemChecked = (id) => {
+    setItems((prev) =>
+      prev.map((i) => (i.id === id ? { ...i, checked: !i.checked } : i))
+    );
+  };
+
   return (
     <DndContext
       sensors={sensors}
@@ -71,7 +77,6 @@ const SortableList = () => {
           className={styles.list}
           dataSource={items}
           bordered
-          // style={{ width: "100%", minWidth: 260, maxWidth: 320 }}
           renderItem={(item) => (
             <SortableItem key={item.id} id={item.id}>
               <List.Item
@@ -84,15 +89,8 @@ const SortableList = () => {
                   <HolderOutlined />
                   {item.content}
                   <Checkbox
-                    style={{ touchAction: "none" }}
                     checked={item.checked}
-                    onChange={() =>
-                      setItems((prev) =>
-                        prev.map((i) =>
-                          i.id === item.id ? { ...i, checked: !i.checked } : i
-                        )
-                      )
-                    }
+                    onChange={() => toggleItemChecked(item.id)}
                     onMouseDown={(e) => {
                       e.stopPropagation();
                     }}
@@ -102,7 +100,10 @@ const SortableList = () => {
                     onTouchEnd={(e) => {
                       e.stopPropagation();
                     }}
-                    data-touch-action="auto"
+                    onFocus={(e) => {
+                      e.stopPropagation();
+                    }}
+                    style={{ touchAction: "manipulation" }}
                   />
                 </Flex>
               </List.Item>
