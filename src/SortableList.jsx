@@ -88,23 +88,25 @@ const SortableList = () => {
                 <Flex justify="space-between" style={{ width: "100%" }}>
                   <HolderOutlined />
                   {item.content}
-                  <Checkbox
-                    checked={item.checked}
-                    onChange={() => toggleItemChecked(item.id)}
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "2px 6px",
+                    }}
                     onMouseDown={(e) => {
                       e.stopPropagation();
                     }}
-                    onTouchStart={(e) => {
-                      e.stopPropagation();
-                    }}
+                    onTouchStart={() => toggleItemChecked(item.id)}
                     onTouchEnd={(e) => {
                       e.stopPropagation();
                     }}
-                    onFocus={(e) => {
-                      e.stopPropagation();
-                    }}
-                    style={{ touchAction: "manipulation" }}
-                  />
+                    onClick={() => toggleItemChecked(item.id)}
+                  >
+                    <Checkbox
+                      checked={item.checked}
+                      style={{ touchAction: "manipulation" }}
+                    />
+                  </div>
                 </Flex>
               </List.Item>
             </SortableItem>
